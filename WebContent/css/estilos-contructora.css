@@ -1,0 +1,628 @@
+﻿@charset "utf-8";
+
+header, nav, section, article, aside, figure, footer{
+	display:block;
+	margin:0;
+	padding:0;
+}
+.limpiar{
+	clear:both;
+}
+a img{
+	border:none;
+}
+a{
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	color:#000;
+	text-decoration:none;
+}
+p, h1, h2, h3{
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	color:#000;
+	margin:6px;
+}
+h1{
+	font-size:24px;
+}
+h2{
+	font-size:18px;
+}
+h3{
+	font-size:16px;
+}
+body{
+	margin:30px;
+	background:#000 url(../imagenes/Fondorojo.jpg);
+}
+
+/*--- Contenidor ---*/
+#contenedor{
+	width:1000px;
+	background:#FFF;
+	margin:0 auto;
+	padding:30px;
+}
+/*--- Cabecera ---*/
+#cabecera{
+	height:72px;
+}
+#logo{
+	width: 360px;
+	height: 85px;
+	float: left;
+	padding-top: 6px;
+}
+#cabecera ul{
+	min-width:166px;
+	height:37px;
+	display:block;
+	float:right;
+	margin:0;
+	padding:0;
+	list-style:none;
+	padding-top:16px;
+}
+#cabecera li{
+	float:right;
+}
+#cabecera li a{
+	height:37px;
+	display:block;
+	margin-left:6px;
+	color:#B3B3B3;
+	font-size:14px;
+}
+#cabecera li a.siguenos{
+	padding-top:10px;
+	height:27px;
+}
+/*---Menu---*/
+.menu
+{
+ list-style-type:none;
+ margin-top:0;
+ margin-bottom:0;
+ margin-left:px;
+ padding:0;	
+}
+
+.menu ul
+{
+ position:absolute;
+ margin:0;
+ padding:0;
+ list-style:none;
+ opacity:0;
+ visibility:hidden;
+ }
+
+.menu li
+{
+ margin:0;
+ padding:0;
+ float:left;
+ position:relative;
+ border-top:1px solid  #000000;
+ border-right:1px solid #000000;
+ border-left:1px solid #000000;
+}
+
+.menu li a
+{
+ display:block;
+ width:192px;
+ padding:0;
+ line-height:30px;
+ text-decoration:none;
+ text-align:center;
+ color:#050505;
+ background-color:#71b8ff;
+ position:relative;
+ font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+ font-size:12px;
+
+}
+
+.menu li a:hover
+{
+	color: #fff;
+	font-weight: bold;
+	background-color: #202020;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.menu li:hover ul
+{
+ opacity:1;	
+ visibility:visible;
+}
+/*--- Cuerpo de la web ---*/
+.titulopaginas{
+	font-size:30px;
+	color:#000;
+	font-weight:bold;
+	font-family: 'Russo One', sans-serif;
+}
+.caja-borde-inferior{
+	padding:10px 0;
+	border-bottom:5px solid #333;
+}
+#bienvenida{
+	width:430px;
+	float:left;
+}
+#bienvenida h1{
+	font-size:43px;
+	color:#737373;
+	font-weight:normal;
+	font-family: 'Russo One', sans-serif;
+}
+#bienvenida p{
+	color:#737373;
+	font-size:13px;
+	line-height:22px;
+}
+#banner{
+	width:491px;
+	float:right;
+}
+
+/*--- Zona Proyectos ---*/
+.subtitulo{
+	font-size:25px;
+	color:#737373;
+}
+.cajaproyectos{
+	width:201px;
+	height:190px;
+	float:left;
+	margin-right:45px;
+}
+.cajaaus{
+	width:201px;
+	height:90px;
+	float:left;
+	margin-right:45px;
+}
+
+
+.cajaproyectosContact{
+	width: 400px;
+	height: auto;
+	float: left;
+	margin-right: 45px;
+}
+
+.cajaproyectos h3{
+	font-size:14px;
+	font-weight:bold;
+	color:#474747;
+	margin:6px 0;
+}
+.cajaproyectos p{
+	color:#858585;
+	margin:6px 0;
+}
+.sinmargen{
+	margin-right:0;
+}
+
+.sinmargenContact{
+	margin-right: 0;
+	width: 450px;
+	height: auto;
+}
+/*---- Zona Servicios ----*/
+.cajaservicios{
+	width: 270px;
+	height: auto;
+	float: left;
+	margin-right: 65px;
+	margin-bottom: 10px;
+
+}
+.serviciosinmar{
+	margin-right:0;
+}
+.cajaservicios .numero{
+	color:#272788;
+	font-size:14px;
+	margin:10px 0;
+}
+.cajaservicios h2{
+	font-size:13px;
+	margin:10px 0;
+}
+.cajaservicios p{
+	color:#737373;
+	margin:6px 0;
+}
+/*--- Pïe pagina ---*/
+#piepagina{
+	width: 100%;
+	padding: 10px 0;
+	background-color: #333;
+}
+#piepagina p{
+	width:590px;
+	display:block;
+	color:#FFF;
+	float:left;
+	padding-top:4px;
+}
+#piepagina ul{
+	width:150px;
+	display:block;
+	float:right;
+	margin:0;
+	padding:0;
+	list-style:none;
+	margin-right:10px;
+}
+#piepagina li{
+	float:right;
+}
+#piepagina li a{
+	height:37px;
+	display:block;
+	margin-left:6px;
+	color:#FFF;
+}
+	
+#piepagina li a.siguepie{
+	padding-top:10px;
+	height:27px;
+}
+		
+
+
+/**********************************************************/
+/****            Tabletas  1024                         ***/
+/**********************************************************/
+@media only screen and (max-width:1024px){
+	body{
+		background:#333;
+	}
+	/*--- Contenidor ---*/
+	#contenedor{
+		width:96%;
+		background:#FFF;
+		margin:0 auto;
+		padding:2%;
+	}
+	/*---- Zona Servicios ----*/
+	.cajaservicios{
+		width:270px;
+		height:264px;
+		float:left;
+		margin-right:65px;
+		margin-bottom:10px;
+		border-top:1px solid #272788;
+	}
+	.serviciosinmar{
+		margin-right:65px;
+	}
+	.cajaservicios .numero{
+		color:#272788;
+		font-size:14px;
+		margin:10px 0;
+	}
+	.cajaservicios h2{
+		font-size:13px;
+		margin:10px 0;
+	}
+	.cajaservicios p{
+		color:#737373;
+		margin:6px 0;
+	}
+
+}
+
+/**********************************************************/
+/****            Tabletas  800                          ***/
+/**********************************************************/
+@media only screen and (max-width:800px){
+	#menu ul{
+		width:462px;
+		height:60px;
+		display:block;
+		background:#666666;
+		float:none;
+		margin:0 auto;
+		padding:0;
+		list-style:none;
+		padding-top:17px;
+		padding-left:8px;
+	}
+	
+	/*--- Cuerpo de la web ---*/
+	
+	#bienvenida{
+		width:100%;
+		float:none;
+	}
+	#bienvenida h1{
+		font-size:43px;
+		color:#737373;
+		font-weight:normal;
+	}
+	#bienvenida p{
+		color:#737373;
+		font-size:13px;
+		line-height:22px;
+	}
+	#banner{
+		width:100%;
+		float:none;
+	}
+	
+	/*--- Pïe pagina ---*/
+	#piepagina p{
+		width:100%;
+		display:block;
+		color:#333;
+		float:none;
+		padding-top:4px;
+		text-align:center;
+	}
+	#piepagina ul{
+		min-width:160px;
+		height:37px;
+		display:block;
+		float:none;
+		margin:0 auto;
+		padding:0;
+		list-style:none;
+	}
+	#piepagina li{
+		float:right;
+	}
+	#piepagina li a{
+		height:37px;
+		display:block;
+		margin-left:6px;
+		color:#333;
+	}
+		
+	#piepagina li a.siguepie{
+		padding-top:10px;
+		height:27px;
+	}
+	
+}
+/**********************************************************/
+/****            Tabletas  603                          ***/
+/**********************************************************/
+@media only screen and (max-width:603px){
+	/*--- Cabecera ---*/
+	#cabecera{
+		height:auto;
+		padding:10px 0;
+	}
+	#logo{
+		width:100%;
+		height:auto;
+		float:none;
+		padding-top:0;
+	}
+	#logo img{
+		display:block;
+		margin:0 auto;
+	}
+	#cabecera ul{
+		display:none;
+	}
+	
+}
+/**********************************************************/
+/****            Tabletas  533                          ***/
+/**********************************************************/
+@media only screen and (max-width:533px){
+	/*---Menu---*/
+	#menu{
+		height:auto;
+		border-bottom:none;
+	}
+	#menu ul{
+		width:100%;
+		height:auto;
+		display:block;
+		background:none;
+		float:none;
+		margin:0;
+		padding:0;
+		list-style:none;
+		padding-top:0;
+		padding-left:0;
+	}
+	#menu li{
+		float:none;
+	}
+	#menu li a{
+		width:100%;
+		text-align:center;
+		display:block;
+		padding:10px 0;
+		font-size:14px;
+		color:#FFF;
+		background:#666666;
+		font-weight:bold;
+		border-right:none;
+		margin-bottom:1px;
+	}
+	
+	#banner img{
+		width:100%;
+		height:auto;
+		display:block;
+	}
+	
+	.cajaproyectos{
+		width:201px;
+		height:190px;
+		float:left;
+		margin-right:20px;
+	}
+}
+/**********************************************************/
+/****            Moviles  480                          ***/
+/**********************************************************/
+@media only screen and (max-width:480px){
+	body{
+		margin:5px;
+	}
+}
+/**********************************************************/
+/****            Moviles  360                          ***/
+/**********************************************************/
+@media only screen and (max-width:360px){
+	#logo img{
+		width:80%;
+		height:auto;
+		display:block;
+		margin:0 auto;
+	}
+}
+/**********************************************************/
+/****            Moviles  320                          ***/
+/**********************************************************/
+@media only screen and (max-width:320px){
+	/*--- Cuerpo de la web ---*/
+	.titulopaginas{
+		font-size:20px;
+		color:#000;
+		font-weight:bold;
+	}
+	#bienvenida h1{
+		font-size:33px;
+		color:#737373;
+		font-weight:normal;
+	}
+}
+/**********************************************************/
+/****            Moviles  240                          ***/
+/**********************************************************/
+@media only screen and (max-width:240px){
+	#bienvenida h1{
+		font-size:23px;
+		color:#737373;
+		font-weight:normal;
+	}
+	/*---- Zona Servicios ----*/
+	.cajaservicios{
+		width:100%;
+		height:auto;
+		float:none;
+		margin-right:0;
+		margin-bottom:10px;
+		border-top:1px solid #272788;
+	}
+	.serviciosinmar{
+		margin-right:0;
+	}
+	.cajaservicios .numero{
+		color:#272788;
+		font-size:14px;
+		margin:10px 0;
+	}
+	.cajaservicios h2{
+		font-size:13px;
+		margin:10px 0;
+	}
+	.cajaservicios p{
+		color:#737373;
+		margin:6px 0;
+	}
+	.cajaservicios img{
+		width:100%;
+		height:auto;
+		display:block;
+	}
+}
+
+
+#reloj{
+
+	color:#333;
+	font-family:"Arial Black", Gadget, sans-serif;
+	float:right;
+	font-size:30px;
+	padding-right:15px;
+	padding-top:15px;
+
+}
+
+#auspi{ 
+	padding-left:110px;
+	width:333px;
+	
+}
+#bannerprin{
+	float:left;
+	width:100%;
+	height:auto;
+
+	
+
+}
+
+//Desplegable 
+
+.social {
+	position:fixed; /* Hacemos que la posición en pantalla sea fija para que siempre se muestre en pantalla*/
+	left: 0; /* Establecemos la barra en la izquierda */
+	top: 220px; /* Bajamos la barra 200px de arriba a abajo */
+	z-index: 2000; /* Utilizamos la propiedad z-index para que no se superponga algún otro elemento como sliders, galerías, etc */
+
+
+}
+.social ul {
+		list-style:none;
+	}
+ 
+.social ul li a {
+		display: inline-block;
+		color:#fff;
+		background: #000;
+		padding: 40px 40px;
+		text-decoration: none;
+		-webkit-transition:all 500ms ease;
+		-o-transition:all 500ms ease;
+		transition:all 500ms ease; /* Establecemos una transición a todas las propiedades */
+	}
+	/* Establecemos los colores de cada red social, aprovechando su class */
+	.social ul li .icon-facebook{background: #3b5998;}
+	.social ul li .icon-twitter {background: #00abf0;}
+	.social ul li .icon-youtube {background: #ae181f;}
+	.social ul li .icon-instagram {background: #C6F;}
+	.social ul li .icon-snapchat {background: #FF0;}
+     
+ 
+	.social ul li a:hover {
+		background: #000; /* Cambiamos el fondo cuando el usuario pase el mouse */
+		padding: 25px 30px; /* Hacemos mas grande el espacio cuando el usuario pase el mouse */
+	}
+#music{
+	padding-left:390px;
+	padding-top:20px;
+
+	}
+	
+#music2{
+	padding-top:23px;
+	padding-right:50px;
+	}	
+
+#music3{
+	padding-top:5px;
+	padding-right:50px;
+	}	
+	
+#patro{
+	float:left;
+	width:33%;
+	height: 150px;
+
+	}
