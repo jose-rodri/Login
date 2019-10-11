@@ -58,7 +58,7 @@ public class ModeloUsuario {
 		try {
 			
 			cn = new Conectar().getConectar();
-			String sql = "insert into usuarios values (?,?,?,?,?,?)";
+			String sql = "insert into usuarios(nombre,apellido,email,movil,dni,clave) values (?,?,?,?,?,?)";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, usuario.getNombre());
 			pstm.setString(2, usuario.getApellido());

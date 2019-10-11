@@ -56,39 +56,11 @@ public class ServletUsuario extends HttpServlet {
 	}
 	
 	
-	protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	
-	
-		
-	}
 	
 	
 	
 	
 
-	
-	protected void AgregarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ModeloUsuario modelUsuario = new ModeloUsuario();
-		
-		Usuario c  = new  Usuario();
-
-		
-		c.setNombre(request.getParameter("txtnombre"));
-		c.setApellido(request.getParameter("txtapellido"));
-		c.setEmail(request.getParameter("txtemail"));
-		c.setMovil(request.getParameter("txtmovil"));
-		c.setDni(request.getParameter("txtdni"));
-		c.setClave(request.getParameter("txtclave"));
-		
-		
-		int respuesta = modelUsuario.AgregarUsuario(c);
-		
-	
-		
-		
-	}
 	
 	
 	
