@@ -1,0 +1,1083 @@
+drop database if exists HospitalCentral
+
+create database HospitalCentral
+
+use HospitalCentral
+
+drop table if exists cita
+
+CREATE TABLE cita (
+  idcita char(20) NOT NULL,
+  fecharegistro date not null,
+  fechacita date NOT NULL,
+  fecharetiro date NOT NULL,
+  primary key (idcita)
+) ENGINE=InnoDB;
+
+
+
+INSERT INTO cita VALUES('8001','2010-11-12','2010-12-01','2010-12-02');
+INSERT INTO cita VALUES('8002','2005-02-02','2015-04-01','2015-06-01');
+
+INSERT INTO cita VALUES('8003','2008-06-01','2008-07-01','2008-08-30');
+
+INSERT INTO cita VALUES('8004','2003-11-12','2010-12-01','2012-12-02');
+
+INSERT INTO cita VALUES('8005','2007-09-01','2007-12-01','2010-12-02');
+
+
+
+
+
+
+drop table if exists especialidades
+
+CREATE TABLE especialidades (
+  idespecialidad char(7) NOT NULL,
+ nombreespecialidad varchar(80) NOT NULL,
+  fecharegistro date NOT NULL,
+  primary key(idespecialidad)
+) ENGINE=InnoDB;
+
+
+
+INSERT INTO especialidades VALUES ('50001','NEUROLOGIA','2010-01-01');
+INSERT INTO especialidades VALUES ('50002','ESTOMATOLOGIA','2009-01-01');
+INSERT INTO especialidades VALUES ('50003','NEURICIRUGIA','2008-01-01');
+INSERT INTO especialidades VALUES ('50004','CARDIOLOGIA','2007-01-01');
+INSERT INTO especialidades VALUES ('50005','UROLOGIA','2008-01-01');
+
+
+
+drop table if exists medico
+
+create table medico(
+  idmedico char(20) NOT NULL,
+ nombremedico varchar(30) NOT NULL,
+  apellidomedico varchar(60) NOT NULL,
+  fechanacimiento date NOT NULL,
+  sexo char(1) NOT NULL,
+  dni char(8) NOT NULL,
+  fechaingreso date not NULL,
+  idrecepcion char(15)not null,
+  idespecialidad char(7)not null,
+ numerocitas int not null,
+  primary key(idmedico)
+) ENGINE=InnoDB;
+
+
+
+
+INSERT INTO medico VALUES ('2001','Javier','Solis Maez','1970-11-30','M','54676545','2011-11-01','20151','50001','1');
+
+INSERT INTO medico VALUES ('2002','Ely','Rodriguez vaez','1980-08-06','F','45345653','2010-08-01','20152','50002','3');
+
+INSERT INTO medico VALUES ('2003','Pedro','Gonzales solis','1984-07-03','M','34642765','2009-05-01','20153','50003','2');
+
+INSERT INTO medico VALUES ('2004','Maria','Villa Quien','1992-02-23','F','98767676','2008-08-01','20154','50004','1');
+
+INSERT INTO medico VALUES ('2005','Arturo','Cabaces Gimenez','1900-06-17','M','34563456','2010-11-01','20155','50005','4');
+
+
+
+
+drop table if exists pacientes
+
+CREATE TABLE pacientes (
+idpaciente char(20) NOT NULL,
+nombrepaciente varchar(30) NOT NULL,
+apellidopaciente varchar(60) NOT NULL,
+fechanacimiento date  NOT NULL,
+ dni char(8) NOT NULL,
+ direccion varchar(120) NOT NULL,
+idrecepcion char(15)not null,
+idcita char(20)not null,
+
+  primary key(idpaciente)
+) ENGINE=InnoDB;
+
+
+INSERT INTO pacientes VALUES('6001','Mario','Perez Maes','1970-11-12','98765676','Av Paladar 453','20151','8001');
+
+INSERT INTO pacientes VALUES('6002','Saul','Gonzales Prada','1980-06-10','56656565','Av Rosales 234','20152','8002');
+
+INSERT INTO pacientes VALUES('6003','Tereza','Perede Herrera','1990-03-28','08989890','Av Rotonda 453','20153','8003');
+
+INSERT INTO pacientes VALUES('6004','Isaid','Chillcce Manrique','1990-05-22','78654356','Av Laguna 453','20154','8004');
+
+INSERT INTO pacientes VALUES('6005','Rosa','Isud Ilek','1200-02-01','76456789','Av Cerillo 453','20155','8005');
+
+
+
+
+
+-- 1 - Tabla Recepcion -------
+
+drop table if exists recepcion
+
+
+CREATE TABLE recepcion (
+ idrecepcion char(15) NOT NULL,
+ nombrerecepcion varchar(60) NOT NULL,
+ idpaciente char(20) not null,
+ idmedico char(20) NOT NULL,
+ loginrecep varchar(15),
+ pasrecepc varchar(15),
+ primary key(idrecepcion)
+) ENGINE=InnoDB ;
+
+
+
+INSERT INTO recepcion VALUES('20151','Jose ','6001','2001','Jose','jose');
+
+INSERT INTO recepcion VALUES('20152','Teresa','6002','2002','Teresa','teresa');
+
+INSERT INTO recepcion VALUES('20153','Mariluna','6003','2003','Mariluna','mariluna');
+
+INSERT INTO recepcion VALUES('20154','Tolobeo ','6004','2004','Tolobeo','Tolobeo');
+
+INSERT INTO recepcion VALUES('20155','Gloria ','6005','2005','Gloria','Gloria');
+
+-- insertar depues
+
+INSERT INTO recepcion VALUES('20155','Maria ','6006','2006','Maria','Maria');
+
+INSERT INTO recepcion VALUES('20155','Fernada ','6007','2007','Fernada','Fernada');
+
+
+
+
+
+
+select * from cita  -- -----
+
+select * from especialidades -- ----
+
+select * from medico -- ----
+
+select * from pacientes -- -----
+
+select * from recepcion -- -------
+
+
+
+
+
+
+
+
+-- llaves foraneas ----
+
+alter table recepcion 
+add constraint idmedico foreign key (idmedico) references medico(idmedico)on delete cascade,
+add constraint idpaciente foreign key (idpaciente) references pacientes(idpaciente)on delete cascade
+
+
+
+
+alter table pacientes 
+add constraint idcita foreign key (idcita) references cita(idcita)on delete cascade
+
+
+
+alter table medico
+add constraint idespecialidad foreign key (idespecialidad) references especialidades(idespecialidad)on delete cascade
+
+
+
+
+
+
+-- -LISTAR CITAS 
+
+drop procedure if exists listarcitas
+
+delimiter @@
+
+
+create procedure listarcita()
+
+begin
+
+
+select * from cita;
+
+end @@
+
+
+delimiter ; 
+
+
+
+call listarcita()
+
+
+-- BUSCAR CITA POR CODIGO
+
+
+drop procedure if exists  Buscarcita
+
+
+delimiter @@
+
+create procedure Buscarcita(d char(20))
+
+begin
+
+
+select * from cita  where idcita   = d;
+
+end @@
+
+delimiter ; 
+
+call Buscarcita(8001)
+
+
+
+
+
+
+-- AGREGAR UNA NUEVA CITA
+
+drop procedure if exists InsertarCita
+
+
+delimiter @@
+
+
+create procedure InsertarCita
+
+(idcita char(20),
+ fecharegistro date,
+ fechacita date,
+ fecharetiro date)
+
+begin
+
+
+insert into cita values(idcita,fecharegistro,fechacita,fecharetiro);
+
+end @@
+
+
+delimiter ; 
+
+
+call InsertarCita('8006','2008-08-01','2008-09-01','2008-09-02')
+
+select * from cita
+
+
+-- ACTUALIZAR CITA
+drop procedure if exists  ActualizarCita
+
+
+delimiter @@
+
+
+create procedure ActualizarCita
+
+(xidcita char(20),
+ xfecharegistro date,
+ xfechacita date,
+ xfecharetiro date)
+
+begin
+
+
+update cita set 
+fecharegistro =xfecharegistro,
+fechacita=xfechacita,
+fecharetiro=xfecharetiro 
+where idcita =xidcita;
+
+end @@
+
+
+delimiter ; 
+
+
+call ActualizarCita('8006','2008-08-01','2008-09-01','2008-09-03')
+
+
+
+-- eliminar cita
+
+
+ drop procedure if exists  EliminarCitaPaciente
+ 
+ 
+
+delimiter @@
+
+
+create procedure EliminarCitaPaciente(Elimiar char(20))
+
+begin
+
+
+delete from cita  where idcita  =Elimiar ;
+
+end @@
+
+
+delimiter ; 
+
+
+
+call EliminarCitaPaciente ('8006')
+
+
+
+
+
+
+
+
+
+
+-- LISTAR ESPECIALIADAD
+
+drop procedure if exists listaEspecialida
+
+
+delimiter @@
+
+
+create procedure listaEspecialida()
+
+begin
+
+
+select * from especialidades;
+
+end @@
+
+
+delimiter ; 
+
+
+
+call listaEspecialida()
+
+
+-- INSERTAR DATOS ESPECIALIDAD
+
+drop procedure if exists InsertarEspecialidad
+
+
+delimiter @@
+
+
+create procedure InsertarEspecialidad(idespecialidad char(7),nombreespecialidad varchar(80),fecharegistro date)
+
+begin
+
+
+insert into especialidades values (idespecialidad,nombreespecialidad,fecharegistro);
+
+end @@
+
+
+delimiter ; 
+
+call InsertarEspecialidad ('50006','ESTOMATOLOGIA','2009-12-30');
+
+
+select * from especialidades
+
+
+-- ACTUALIZAR ESPECIALIDAD
+
+drop procedure if exists   ActualizarEspecialidad
+
+
+delimiter @@
+
+
+create procedure ActualizarEspecialidad(
+xidespecialidad char(7),
+xnombreespecialidad varchar(80),
+xfecharegistro date)
+
+begin
+
+
+update especialidades set 
+nombreespecialidad = xnombreespecialidad,
+fecharegistro=xfecharegistro
+ where idespecialidad = xidespecialidad;
+
+end @@
+
+
+delimiter ; 
+
+
+call ActualizarEspecialidad ('50006','ESTOMATOLOGIA','2009-12-01');
+
+
+-- Buscar especialidad ----
+
+drop procedure if exists BuscarEspecialidad
+
+delimiter @@
+
+
+create procedure BuscarEspecialidad( codigo char(7))
+
+begin
+
+select * from especialidades where idespecialidad  = codigo;
+
+end @@
+
+
+delimiter ; 
+
+
+call BuscarEspecialidad ('50003')
+
+
+
+-- elimiar Especialidad,Medico
+
+drop procedure if exists EliminarEspeMedic
+
+delimiter @@
+
+
+create procedure EliminarEspeMedic(Elimiar char(7))
+
+begin
+
+
+delete from especialidades  where idespecialidad  =Elimiar ;
+
+end @@
+
+
+delimiter ; 
+
+
+call EliminarEspeMedic('50006')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- LISTAR MEDICO
+
+
+
+drop procedure if exists listaMedico
+
+
+delimiter @@
+
+
+create procedure listaMedico()
+
+begin
+
+
+select * from medico;
+
+end @@
+
+
+delimiter ; 
+
+call listaMedico()
+
+
+
+-- INSERT UN NUEVO MEDICO
+
+drop procedure if exists  InsertarMedico
+
+
+delimiter @@
+
+
+create procedure InsertarMedico(
+idmedico char(20),
+nombremedico varchar(30), 
+apellidomedico varchar(60),
+fechanacimiento date,
+sexo char(1),
+dni char(8),
+fechaingreso date,
+idrecepcion char(15),
+idespecialidad char(7),
+numerocitas int)
+
+begin
+
+
+insert into Medico values(
+idmedico,
+nombremedico,
+apellidomedico,
+fechanacimiento,
+sexo,
+dni,
+fechaingreso,
+idrecepcion,
+idespecialidad,
+numerocitas );
+
+end @@
+
+
+delimiter ; 
+
+
+
+call InsertarMedico('2006','Daniel','Davila Sedan','1980-06-17','M','56453456','2010-12-01','20156','50006','1');
+
+
+select * from especialidades
+
+-- ACTUALIZAR MEDICO
+
+
+drop procedure if exists ActualizarMedico
+
+delimiter @@
+
+
+create procedure ActualizarMedico(
+xidmedico char(20),
+xnombremedico varchar(30),
+ xapellidomedico varchar(60),
+ xfechanacimiento date,
+xsexo char(1),
+xdni char(8),
+xfechaingreso date,
+xidrecepcion char(15),
+xidespecialidad char(7),
+xnumerocitas int)
+
+begin
+
+
+Update Medico set nombremedico=xnombremedico,
+apellidomedico=xapellidomedico,
+fechanacimiento=xfechanacimiento,
+sexo=xsexo,dni=xdni,
+fechaingreso=xfechaingreso,
+idrecepcion=xidrecepcion,
+idespecialidad=xidespecialidad,
+numerocitas=xnumerocitas
+ where idmedico=xidmedico;
+
+end @@
+
+
+delimiter ; 
+
+
+
+call ActualizarMedico('2006','Daniel','Davila Sedan','1980-06-17','M','56453456','2010-12-01','20156','50006','2');
+
+-- Buscar MEdico por codigo
+
+drop procedure if exists BuscarMedico
+
+delimiter @@
+
+
+create procedure BuscarMedico(id char(20))
+
+begin
+
+select * from medico where idmedico = id;
+
+end @@
+
+
+delimiter ; 
+
+
+call BuscarMedico('2004')
+
+-- BUSCAR MEDICO POR NOMBRE
+
+
+
+
+drop procedure if exists BuscarMedicoNombre
+
+
+delimiter @@
+
+create procedure BuscarMedicoNombre( nom  varchar(30))
+
+begin
+
+select * from medico where nombremedico  like concat('%' ,nom, '%');
+
+end @@
+
+delimiter ;
+
+
+call BuscarMedicoNombre ('an')
+
+
+
+
+
+-- LISTAR PACIENTE
+
+drop procedure if exists listaPaciente
+
+
+delimiter @@
+
+
+create procedure listaPaciente()
+
+begin
+
+
+select * from pacientes;
+
+end @@
+
+
+delimiter ; 
+
+call listaPaciente()
+
+
+
+-- INSERT UN NUEVO DATO DE PACIENTE
+
+
+drop procedure if exists InsertarPaciente
+
+
+
+delimiter @@
+
+
+create procedure InsertarPaciente(
+idpaciente char(20),
+nombrepaciente varchar(30),
+apellidopaciente varchar(60),
+fechanacimiento date,
+dni char(8),
+direccion varchar(120),
+idrecepcion char(15),
+idcita char(20))
+
+begin
+
+insert into pacientes values(
+idpaciente,
+nombrepaciente,
+apellidopaciente,
+fechanacimiento,
+dni,
+direccion,
+idrecepcion,
+idcita );
+
+end @@
+
+
+delimiter ; 
+
+
+
+
+call InsertarPaciente ('6006','Julia','Ramirez Jimenez','2011-02-01','45654345','Av Corralillo 456','20156','8006')
+
+
+
+
+
+
+
+-- ACTUALIZAR PACIENTES
+
+drop procedure if exists  ActualizarPaciente
+
+
+delimiter @@
+
+
+create procedure ActualizarPaciente(
+xidpaciente char(20),
+xnombrepaciente varchar(30),
+xapellidopaciente varchar(60),
+xfechanacimiento date,
+xdni char(8),
+xdireccion varchar(120),
+xidrecepcion char(15),
+xidcita char(20))
+
+begin
+
+update pacientes set
+ nombrepaciente=xnombrepaciente,
+ apellidopaciente=xapellidopaciente,
+ fechanacimiento=xfechanacimiento,
+ dni=xdni,
+ direccion=xdireccion,
+ idrecepcion=xidrecepcion,
+ idcita=xidcita
+ where idpaciente =xidpaciente;
+
+end @@
+
+
+delimiter ; 
+
+
+
+
+
+
+call ActualizarPaciente ('6006','Julia','Ramirez Jimenez','2011-02-01','34000000','Av Corralillo 456','20156','8006')
+
+
+
+
+-- Buscar paciente por codigo
+
+drop procedure if exists BuscarPaciente
+
+delimiter @@
+
+
+create procedure BuscarPaciente( cod char(20))
+
+begin
+
+
+select * from pacientes  where idpaciente = cod ;
+
+end @@
+
+
+delimiter ; 
+
+
+
+
+
+call BuscarPaciente('6004')
+
+
+-- BUSCAR PACIENTE POR NOMBRE
+
+drop procedure if exists BuscarPacienteNombre
+
+delimiter @@
+
+create procedure BuscarPacienteNombre( nom  varchar(30))
+
+begin
+
+select * from pacientes where nombrepaciente  like concat('%' ,nom, '%');
+
+end @@
+
+delimiter ;
+
+
+
+
+
+call BuscarPacienteNombre('lia')
+
+
+
+
+
+-- TRIGGERS ----------------------------------------------------------------------- TRIGGERS
+
+
+select * from cita
+
+select * from especialidades
+
+select * from medico 
+
+select * from pacientes
+
+select * from Detalle_Tablas
+
+
+
+
+
+
+create table  Detalle_Tablas
+(
+codigo int,
+nombre varchar(50),
+tabla varchar(50),
+fecha varchar(50),
+usuario varchar(50),
+tipo_transaccion varchar(50)
+
+);
+
+--   -------------------DETALLE HISTORIAL-----------------------------------------
+
+
+DELIMITER @@
+
+CREATE PROCEDURE ListarDetalle( )
+BEGIN
+
+SELECT * FROM Detalle_Tablas;
+
+
+END @@
+DELIMITER ;
+
+
+
+
+delimiter @@
+
+create trigger Inserta_Detalle_Cita
+before insert on cita
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idcita,new.fecharegistro,'TABLA_CITA',now(),current_user(),'Realizó Inserción');
+
+end @@
+
+delimiter ;
+
+
+-- TRIGGER PARA  ACTUALIZAR
+
+
+
+delimiter @@
+
+create trigger Actualiza_Detalle_Cita
+before update on cita
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idcita,new.fecharegistro,'TABLA_CITA',now(),current_user(),'Realizó Actualización');
+
+end @@
+
+delimiter ;
+
+
+-- TRIGGER ELIMINIACION
+
+
+
+delimiter @@
+
+create trigger Elimina_Detalle_Cita
+after delete on cita
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(OLD.idcita,OLD.fecharegistro,'TABLA_CITA',now(),current_user(),'Realizó dos Eliminaciones');
+
+end @@
+
+delimiter ;
+
+
+
+
+-- TRIGGER PARA LA TABLA ESPECIALIDADES
+
+delimiter @@
+
+create trigger Inserta_Detalle_Especialidad
+before insert on especialidades
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idespecialidad,new.nombreespecialidad,'TABLA_ESPECIALIDAD',now(),current_user(),'Realizó Inserción');
+
+end @@
+
+delimiter ;
+
+
+-- TRIGGER ACTUALIZAR ESPECIALIDAD
+
+
+delimiter @@
+
+create trigger Actualiza_Detalle_Especialidad
+before update on especialidades
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idespecialidad,new.nombreespecialidad,'TABLA_ESPECIALIDAD',now(),current_user(),'Realizó Actualización');
+
+end @@
+
+delimiter ;
+
+-- TRIGGER PARA ELIMINACION
+
+
+delimiter @@
+
+create trigger Eliminar_Detalle_Especialidad
+after delete on especialidades
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(OLD.idespecialidad,OLD.nombreespecialidad,'TABLA_ESPECIALIDAD',now(),current_user(),'Realizó dos Eliminaciones');
+
+end @@
+
+delimiter ;
+
+
+-- TRIGGER PARA TABLA MEDICO --------------------------------------------
+
+
+delimiter @@
+
+create trigger Insert_Detalle_Medico
+before insert on medico
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idmedico,new.nombremedico,'TABLA_MEDICO',now(),current_user(),'Realizó Inserción');
+
+end @@
+
+delimiter ;
+
+--  TRIGGER ACTUALIZACION PARA MEDICO
+
+delimiter @@
+
+create trigger Actualiza_Detalle_Medico
+before update on medico
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idmedico,new.nombremedico,'TABLA_MEDICO',now(),current_user(),'Realizó Actualización');
+
+end @@
+
+delimiter ;
+
+-- TRIGGER `PARA LA TABLA PACIENTE----------------------------
+
+
+select * from pacientes
+
+delimiter @@
+
+create trigger Insert_Detalle_Paciente
+before insert on pacientes
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idpaciente,new.nombrepaciente,'TABLA_PACIENTE',now(),current_user(),'Realizó Inserción');
+
+end @@
+
+delimiter ;
+
+
+-- TRIGGER ACTUALIZACION TABLA PACIENTE
+
+delimiter @@
+
+create trigger Actualiza_Detalle_Paciente
+before update on pacientes
+for each row
+begin
+insert into Detalle_Tablas(codigo,nombre,tabla,fecha,usuario,tipo_transaccion)values(new.idpaciente,new.nombrepaciente,'TABLA_PACIENTE',now(),current_user(),'Realizó Actualiazción');
+
+end @@
+
+delimiter ;
+
+
+-- ---------------RPORTES DE PACIENTE------------------------------
+drop procedure MostrarListPaciente
+
+
+delimiter @@
+
+create procedure MostrarListPaciente(codig int)
+begin
+
+
+select ci.idcita,nombrepaciente from especialidades  e inner join
+ medico m  on e.idespecialidad = m.idespecialidad 
+inner join recepcion rec on m.idmedico = rec.idmedico 
+inner join   pacientes pac   on rec.idpaciente = pac.idpaciente 
+inner join cita ci on pac.idcita = ci.idcita
+
+ where nombrepaciente = 'Saul'   ;
+
+
+
+end @@
+
+delimiter ;
+
+call MostrarListPaciente('6006')
+
+
+-- ----------------REPORTE DE PACIENTE CITA Y MEDICO QUE LO ATIENDE 
+use hospitalcentral
+
+drop procedure reporte
+
+
+DELIMITER @@
+
+CREATE PROCEDURE Reporte( nombre varchar(40))
+BEGIN
+
+
+select  c.idpaciente ,nombrepaciente,c.dni,direccion,nombrerecepcion,nombremedico,nombreespecialidad,fechacita,fecharetiro
+
+
+ from cita ct inner join pacientes c  on c.idcita = ct.idcita 
+ inner join  recepcion rc on rc.idpaciente = c.idpaciente
+ inner join medico md on md.idmedico=rc.idmedico
+ inner join especialidades es on es.idespecialidad = md.idespecialidad  
+ where nombrepaciente like concat('%' ,nombre, '%');
+ 
+ 
+ 
+END @@
+DELIMITER ;
+
+
+
+call Reporte ('R')
+
+
+
+
+
+select * from pacientes
+
+
+
+
